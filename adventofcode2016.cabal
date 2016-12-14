@@ -71,7 +71,15 @@ executable AdventFive
                      , split
                      , cryptohash
                      , bytestring
-                     , bytestring-show
+  default-language:    Haskell2010
+
+executable AdventSix
+  hs-source-dirs:      src/Six
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
   default-language:    Haskell2010
 
 test-suite adventofcode2016-test
