@@ -4,6 +4,7 @@ import           Data.Char
 import           Data.List
 import           Data.List.Split
 import           Data.Ord
+import           Lib
 
 {-
 Each room consists of an encrypted name (lowercase letters separated by dashes) followed by a dash, a sector ID, and a checksum in square brackets.
@@ -18,7 +19,7 @@ yes = ["aaaaa-bbb-z-y-x-123[abxyz]","a-b-c-d-e-f-g-h-987[abcde]","not-a-real-roo
 no  = ["totally-real-room-200[decoy]"]
 
 -- this could use a real parser
-parse room = (sort $ filter isAlpha name,sectorid,chksum)
+parse room = (name,sectorid,chksum)
   where name = takeWhile (not . isDigit) room
         sectorid = takeWhile isDigit  (dropWhile (not . isDigit) room)
         chksum = tail $ takeWhile (/= ']') (dropWhile (/= '[') room)
@@ -30,12 +31,24 @@ byLength a b = if length a < length b then GT else LT
 
 check (roomname,sectorid,checksum) = thissum == checksum
   where triple = parse roomname
-        thissum = concatMap (take 1) (take 5 . makechksum $ first triple)
+        thissum = concatMap (take 1) (take 5 . makechksum . filter isAlpha $ first triple)
+
+validrooms cs = filter check (map parse $ lines cs)
 
 main = do contents <- readFile "input.txt"
-          print $ sum $ map (read . second) $ filter check (map parse $ lines contents)
+          let valid = map numit $ validrooms contents
+          print . sum $ map second valid
+          mapM_ print $ filter (\(r,s) -> take 5 r == "north") $ map decrypt valid
 
+numit :: (a,String,c) -> (a,Int,c)
+numit (a,b,c) = (a,read b,c)
 
 first (a,_,_) = a
 second (_,b,_) = b
 third (_,_,c) = c
+
+decrypt (r,s,_) = (rotate s r,s)
+
+aval = ord 'a'
+rotate n = map (\x -> chr . (+ aval)$ (ord x - aval + m) `mod` 26)
+  where m = n `mod` 26
