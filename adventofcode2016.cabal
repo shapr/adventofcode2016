@@ -105,6 +105,15 @@ executable AdventEighteen
                      , containers >= 0.5.7.1
   default-language:    Haskell2010
 
+executable AdventNineteen
+  hs-source-dirs:      src/Nineteen
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+  default-language:    Haskell2010
+
 test-suite adventofcode2016-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
