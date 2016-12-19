@@ -73,7 +73,6 @@ executable AdventFive
                      , split
                      , cryptohash
                      , bytestring
-                     , bytestring-show
   default-language:    Haskell2010
 
 executable AdventSix
@@ -85,8 +84,8 @@ executable AdventSix
                      , containers >= 0.5.7.1
   default-language:    Haskell2010
 
-executable AdventEighteen
-  hs-source-dirs:      src/Eighteen
+executable AdventSeventeen
+  hs-source-dirs:      src/Seventeen
   main-is:             Main.hs
   ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
   build-depends:       adventofcode2016
@@ -94,6 +93,16 @@ executable AdventEighteen
                      , containers >= 0.5.7.1
                      , bytestring
                      , cryptohash
+                     , array
+  default-language:    Haskell2010
+
+executable AdventEighteen
+  hs-source-dirs:      src/Eighteen
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
   default-language:    Haskell2010
 
 test-suite adventofcode2016-test

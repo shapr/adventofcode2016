@@ -43,10 +43,6 @@ main = do contents <- readFile "input.txt"
 numit :: (a,String,c) -> (a,Int,c)
 numit (a,b,c) = (a,read b,c)
 
-first (a,_,_) = a
-second (_,b,_) = b
-third (_,_,c) = c
-
 decrypt (r,s,_) = (rotate s r,s)
 
 aval = ord 'a'
