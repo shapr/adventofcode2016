@@ -14,16 +14,16 @@ import           Text.Megaparsec.String
 
 
 data AState = S { _a :: !Int, _b :: !Int, _c :: !Int, _d :: !Int, _pc :: !Int, _tglm :: Maybe Int } deriving Show
-emptyA = S 0 0 0 0 0 Nothing
+emptyA7 = S 7 0 0 0 0 Nothing
+emptyA12 = S 12 0 0 0 0 Nothing
 makeLenses ''AState
 
 test_input = "cpy 2 a\ntgl a\ntgl a\ntgl a\ncpy 1 a\ndec a\ndec a\n"
 
 main = do contents <- readFile "input.txt"
           let program = parseLines expr contents
-          -- print $ last $ takeWhile (\as -> view pc as < length program) (iterate (eval program) emptyA)
-          print $ last $ takeWhile (\(es,as) -> view pc as < length program) (iterate eval'' (program,emptyA))
-          -- print $ last $ takeWhile (\as -> (view pc as) < length program) (iterate (eval program) (S 0 0 1 0 0))
+          print $ last $ takeWhile (\(es,as) -> view pc as < length program) (iterate eval'' (program,emptyA7))
+          print $ last $ takeWhile (\(es,as) -> view pc as < length program) (iterate eval'' (program,emptyA12))
 
 
 program = [Cpy (Lit 2) (Reg 'a'),Tgl (Reg 'a'),Tgl (Reg 'a'),Tgl (Reg 'a'),Cpy (Lit 1) (Reg 'a'),Dec (Reg 'a'),Dec (Reg 'a')]
