@@ -151,7 +151,7 @@ executable AdventTwentyThree
 executable AdventTwentyFive
   hs-source-dirs:      src/TwentyFive
   main-is:             Main.hs
-  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N -funbox-strict-fields
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N -funbox-strict-fields -Wall -Wno-missing-signatures -Wno-unused-do-bind
   build-depends:       adventofcode2016
                      , base
                      , containers >= 0.5.7.1
