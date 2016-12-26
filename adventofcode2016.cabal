@@ -137,38 +137,6 @@ executable AdventNineteen
                      , containers >= 0.5.7.1
   default-language:    Haskell2010
 
-executable AdventTwenty
-  hs-source-dirs:      src/Twenty
-  main-is:             Main.hs
-  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       adventofcode2016
-                     , base
-                     , containers >= 0.5.7.1
-                     , IntervalMap
-  default-language:    Haskell2010
-
-executable AdventTwentyOne
-  hs-source-dirs:      src/TwentyOne
-  main-is:             Main.hs
-  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       adventofcode2016
-                     , base
-                     , containers >= 0.5.7.1
-                     , IntervalMap
-                     , megaparsec
-  default-language:    Haskell2010
-
-executable AdventTwentyTwo
-  hs-source-dirs:      src/TwentyTwo
-  main-is:             Main.hs
-  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       adventofcode2016
-                     , base
-                     , containers >= 0.5.7.1
-                     , IntervalMap
-                     , megaparsec
-  default-language:    Haskell2010
-
 executable AdventTwentyThree
   hs-source-dirs:      src/TwentyThree
   main-is:             Main.hs
