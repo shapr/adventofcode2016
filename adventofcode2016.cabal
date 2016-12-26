@@ -21,6 +21,7 @@ library
                      , containers >= 0.5.7.1
                      , parsec >= 3.1.11
                      , split
+                     , megaparsec
   default-language:    Haskell2010
 
 executable AdventOne
@@ -73,6 +74,7 @@ executable AdventFive
                      , split
                      , cryptohash
                      , bytestring
+                     , parallel
   default-language:    Haskell2010
 
 executable AdventSix
@@ -82,6 +84,27 @@ executable AdventSix
   build-depends:       adventofcode2016
                      , base
                      , containers >= 0.5.7.1
+  default-language:    Haskell2010
+
+executable AdventSeven
+  hs-source-dirs:      src/Seven
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , megaparsec
+  default-language:    Haskell2010
+
+executable AdventTwelve
+  hs-source-dirs:      src/Twelve
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , megaparsec
+                     , lens
   default-language:    Haskell2010
 
 executable AdventSeventeen
@@ -114,6 +137,49 @@ executable AdventNineteen
                      , containers >= 0.5.7.1
   default-language:    Haskell2010
 
+executable AdventTwenty
+  hs-source-dirs:      src/Twenty
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , IntervalMap
+  default-language:    Haskell2010
+
+executable AdventTwentyOne
+  hs-source-dirs:      src/TwentyOne
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , IntervalMap
+                     , megaparsec
+  default-language:    Haskell2010
+
+executable AdventTwentyTwo
+  hs-source-dirs:      src/TwentyTwo
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , IntervalMap
+                     , megaparsec
+  default-language:    Haskell2010
+
+executable AdventTwentyThree
+  hs-source-dirs:      src/TwentyThree
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N -funbox-strict-fields
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , megaparsec
+                     , lens
+  default-language:    Haskell2010
+
 test-suite adventofcode2016-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
@@ -121,6 +187,7 @@ test-suite adventofcode2016-test
   build-depends:       adventofcode2016
                      , base
                      , containers >= 0.5.7.1
+                     , quickcheck-instances
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 
