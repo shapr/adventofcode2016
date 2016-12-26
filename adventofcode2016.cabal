@@ -148,6 +148,18 @@ executable AdventTwentyThree
                      , lens
   default-language:    Haskell2010
 
+executable AdventTwentyFive
+  hs-source-dirs:      src/TwentyFive
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N -funbox-strict-fields
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , megaparsec
+                     , lens
+                     , parallel
+  default-language:    Haskell2010
+
 test-suite adventofcode2016-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
