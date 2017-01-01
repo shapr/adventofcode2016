@@ -107,6 +107,17 @@ executable AdventTwelve
                      , lens
   default-language:    Haskell2010
 
+executable AdventSixteen
+  hs-source-dirs:      src/Sixteen
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , megaparsec
+  default-language:    Haskell2010
+
+
 executable AdventSeventeen
   hs-source-dirs:      src/Seventeen
   main-is:             Main.hs
