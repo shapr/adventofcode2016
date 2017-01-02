@@ -22,6 +22,8 @@ library
                      , parsec >= 3.1.11
                      , split
                      , megaparsec
+                     , hspec-megaparsec
+                     , hspec
   default-language:    Haskell2010
 
 executable AdventOne
@@ -157,6 +159,24 @@ executable AdventTwenty
                      , containers >= 0.5.7.1
                      , range
                      , megaparsec
+  default-language:    Haskell2010
+
+executable AdventTwentyTwo
+  hs-source-dirs:      src/TwentyTwo
+  main-is:             Main.hs
+  ghc-options:         -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       adventofcode2016
+                     , base
+                     , containers >= 0.5.7.1
+                     , hspec
+                     , hspec-megaparsec
+                     , hspec-smallcheck
+                     , lens
+                     , megaparsec
+                     , range
+                     , smallcheck
+                     , tasty
+                     , tasty-hunit
   default-language:    Haskell2010
 
 executable AdventTwentyThree
