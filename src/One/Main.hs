@@ -2,21 +2,20 @@ module Main where
 
 import           Data.List
 import           Data.List.Split
-import           Data.Map.Strict hiding (foldl, foldl', map)
 import           Data.Maybe      (fromJust)
 import qualified Data.Set        as Set hiding (foldl')
 
+-- my puzzle input
 input = "R2, L5, L4, L5, R4, R1, L4, R5, R3, R1, L1, L1, R4, L4, L1, R4, L4, R4, L3, R5, R4, R1, R3, L1, L1, R1, L2, R5, L4, L3, R1, L2, L2, R192, L3, R5, R48, R5, L2, R76, R4, R2, R1, L1, L5, L1, R185, L5, L1, R5, L4, R1, R3, L4, L3, R1, L5, R4, L4, R4, R5, L3, L1, L2, L4, L3, L4, R2, R2, L3, L5, R2, R5, L1, R1, L3, L5, L3, R4, L4, R3, L1, R5, L3, R2, R4, R2, L1, R3, L1, L3, L5, R4, R5, R2, R2, L5, L3, L1, L1, L5, L2, L3, R3, R3, L3, L4, L5, R2, L1, R1, R3, R4, L2, R1, L1, R3, R3, L4, L2, R5, R5, L1, R4, L5, L5, R1, L5, R4, R2, L1, L4, R1, L1, L1, L5, R3, R4, L2, R1, R2, R1, R1, R3, L5, R1, R4"
-
-input' = "R8, R4, R4, R8" -- for part 2
 
 inputToTurnInt (a:as) = case a of 'R' -> (R, read as :: Int)
                                   'L' -> (L, read as :: Int)
+                                  _   -> error "bad input for inputToTurnInt"
 
 directions = map inputToTurnInt (splitOn ", " input)
 
 -- convert left and right to exact instead of relative
-rToE o []         = []
+rToE _ []         = []
 rToE o ((R,i):as) = (right o, i) : rToE (right o) as
 rToE o ((L,i):as) = (left o, i)  : rToE (left o)  as
 
@@ -72,9 +71,9 @@ totalDirs = map total' $ scanl addDir (0,0,0,0) (concatMap rep exact)
 dup :: Ord a => [a] -> Maybe a
 dup xs = dup' xs Set.empty
   where dup' [] _ = Nothing
-        dup' (x:xs) s = if Set.member x s
-                           then Just x
-                           else dup' xs (Set.insert x s)
+        dup' (z:zs) s = if Set.member z s
+                           then Just z
+                           else dup' zs (Set.insert z s)
 
 {- the above does not work because I need to check every x,y coordinate that the path crosses,
 rather than checking each location where the path turns.
