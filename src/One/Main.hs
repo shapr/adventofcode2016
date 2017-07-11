@@ -8,6 +8,25 @@ import qualified Data.Set        as Set hiding (foldl')
 -- my puzzle input
 input = "R2, L5, L4, L5, R4, R1, L4, R5, R3, R1, L1, L1, R4, L4, L1, R4, L4, R4, L3, R5, R4, R1, R3, L1, L1, R1, L2, R5, L4, L3, R1, L2, L2, R192, L3, R5, R48, R5, L2, R76, R4, R2, R1, L1, L5, L1, R185, L5, L1, R5, L4, R1, R3, L4, L3, R1, L5, R4, L4, R4, R5, L3, L1, L2, L4, L3, L4, R2, R2, L3, L5, R2, R5, L1, R1, L3, L5, L3, R4, L4, R3, L1, R5, L3, R2, R4, R2, L1, R3, L1, L3, L5, R4, R5, R2, R2, L5, L3, L1, L1, L5, L2, L3, R3, R3, L3, L4, L5, R2, L1, R1, R3, R4, L2, R1, L1, R3, R3, L4, L2, R5, R5, L1, R4, L5, L5, R1, L5, R4, R2, L1, L4, R1, L1, L1, L5, R3, R4, L2, R1, R2, R1, R1, R3, L5, R1, R4"
 
+-- handy machinery below
+data Orientation = North | East | South | West deriving (Eq, Ord, Show, Enum, Bounded)
+data Turn = L | R deriving (Eq, Ord, Show)
+
+class Direction a where
+  left :: a -> a
+  right :: a -> a
+-- there's gotta be a better way, what I really want is an Enum that wraps around, does that exist?
+
+instance Direction Orientation where
+  left North = West
+  left East  = North
+  left South = East
+  left West  = South
+  right North = East
+  right East  = South
+  right South = West
+  right West  = North
+
 inputToTurnInt (a:as) = case a of 'R' -> (R, read as :: Int)
                                   'L' -> (L, read as :: Int)
                                   _   -> error "bad input for inputToTurnInt"
@@ -37,24 +56,7 @@ total' (n,e,s,w) = (n - s,e - w,0,0)
 main = do print $ total $ foldl' addDir (0,0,0,0) exact
           print $ total $ fromJust $ dup totalDirs
 
--- handy machinery below
-data Orientation = North | East | South | West deriving (Eq, Ord, Show, Enum, Bounded)
-data Turn = L | R deriving (Eq, Ord, Show)
 
-class Direction a where
-  left :: a -> a
-  right :: a -> a
-
--- there's gotta be a better way, what I really want is an Enum that wraps around, does that exist?
-instance Direction Orientation where
-  left North = West
-  left East  = North
-  left South = East
-  left West  = South
-  right North = East
-  right East  = South
-  right South = West
-  right West  = North
 
 -- part two
 {-
